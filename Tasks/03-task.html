@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        td,
+        th {
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="statsTable">
+        <tr>
+            <th>Месяц</th>
+            <th>Отдел 1</th>
+            <th>Отдел 2</th>
+        </tr>
+        <tr>
+            <td>Январь</td>
+            <td>50</td>
+            <td>120</td>
+        </tr>
+        <tr>
+            <td>Февраль</td>
+            <td>60</td>
+            <td>140</td>
+        </tr>
+        <tr>
+            <td>Март</td>
+            <td>125</td>
+            <td>115</td>
+        </tr>
+        <tr>
+            <td>Апрель</td>
+            <td>87</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>Март</td>
+            <td>95</td>
+            <td>80</td>
+        </tr>
+        <tr>
+            <td>Июнь</td>
+            <td>115</td>
+            <td>90</td>
+        </tr>
+        <tr>
+            <td>Июль</td>
+            <td>125</td>
+            <td>100</td>
+        </tr>
+    </table>
+
+    <div id="result"></div>
+
+    <script>
+        let table = document.querySelector("#statsTable");
+        let rows = table.querySelectorAll("tr");
+
+        let sumDept1 = 0;
+        let sumDept2 = 0;
+
+        for (let i = 1; i < rows.length; i++) {
+            let cells = rows[i].querySelectorAll("td");
+            if (cells.length >= 3) {
+                let val1 = Number(cells[1].textContent.trim());
+                let val2 = Number(cells[2].textContent.trim());
+
+                if (!isNaN(val1)) {
+                    sumDept1 += val1;
+                }
+                if (!isNaN(val2)) {
+                    sumDept2 += val2;
+                }
+            }
+        }
+        let totalRow = document.createElement("tr");
+        let cellLabel = document.createElement("td");
+        cellLabel.textContent = "Итого";
+        let cellSum1 = document.createElement("td");
+        cellSum1.textContent = sumDept1;
+        let cellSum2 = document.createElement("td");
+        cellSum2.textContent = sumDept2;
+        totalRow.appendChild(cellLabel);
+        totalRow.appendChild(cellSum1);
+        totalRow.appendChild(cellSum2);
+        table.appendChild(totalRow);
+        let resultDiv = document.querySelector("#result");
+        if (sumDept1 > sumDept2)
+        {
+            resultDiv.textContent = "Отдел 1 сделал больше продаж";
+        }
+        else if (sumDept2 > sumDept1)
+        {
+            resultDiv.textContent = "Отдел 2 сделал больше продаж";
+        }
+        else
+        {
+            resultDiv.textContent = "Отделы сделали одинаковое количество продаж";
+        }
+        /*
+        Задание:
+        Добавьте строку "Итого" для таблицы statsTable. Напишите сценарий, которым выведите во вторую ячейку этой строки сумму всех числовых значений второй колонки.
+        Выведите в третью ячейку этой строки сумму всех числовых значений из третьей колонки таблицы.
+        В div с id result выведите сообщение "Отдел 1 сделал больше продаж" или "Отдел 2 сделал больше продаж" на основе раннее вычисленных значений в строке "Итого".
+        Используйте любые методы, которые были рассмотрены на в прошлых уроках.
+        */
+    </script>
+</body>
+
+</html>
